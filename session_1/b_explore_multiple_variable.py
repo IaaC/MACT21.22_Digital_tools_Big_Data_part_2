@@ -42,7 +42,7 @@ url = 'https://opendata-ajuntament.barcelona.cat/data/dataset/cf1de5ca-9d1c-424c
 bcn_stations = pd.read_csv(url)
 
 # Filtering to get the values for a single variable
-bcn_mean_temperature = bcn_stations[bcn_stations['ACRÒNIM'] == 'TM']
+bcn_mean_temperature = bcn_stations[bcn_stations['ACRÒNIM'] == 'TM'].copy()
 
 # Default histogram for single variable
 sns.histplot(data=bcn_mean_temperature, x="VALOR", kde=True)
@@ -53,6 +53,7 @@ bcn_mean_temperature['DATE'] = pd.to_datetime(bcn_mean_temperature['DATA_LECTURA
 
 # Scatter plot
 sns.scatterplot(data=bcn_mean_temperature, x="DATE", y="VALOR")
+plt.show()
 # Task
 # Customise plots based on seaborn documentation
 # https://seaborn.pydata.org/generated/seaborn.scatterplot.html

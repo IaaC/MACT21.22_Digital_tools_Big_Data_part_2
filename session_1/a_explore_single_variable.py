@@ -33,7 +33,7 @@ open_sense_measures = pd.read_csv('../data/barcelona/opensensemap_org-barcelona.
 sns.histplot(data=open_sense_measures, x="value")
 plt.show()
 
-# custome binwidth and density
+# custome bin width and density
 sns.histplot(data=open_sense_measures, x="value", bins=20, kde=True)
 plt.show()
 
