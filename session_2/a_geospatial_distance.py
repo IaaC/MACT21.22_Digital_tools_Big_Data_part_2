@@ -38,11 +38,13 @@ bcn_stations_geo = geopandas.GeoDataFrame(bcn_stations, crs=crs, geometry=geomet
 geometry = [Point(xy) for xy in zip(open_sense_measures["lon"], open_sense_measures["lat"])]
 open_sense_geo = geopandas.GeoDataFrame(open_sense_measures, crs=crs, geometry=geometry)
 
-# we can calculate the distrance between two given points
+# we can calculate the distrance between a dataframe and a reference point
+reference = Point(2.05, 41.38)
+distance = open_sense_geo.distance(Point(2.05, 41.38))
 
-# task: change the points and get to the discante
-
+# task: change the points and get to the distance
 p1 = open_sense_geo.iloc[[0]]
+p2 = bcn_stations_geo.iloc[[0]]
 distance = p1.distance(Point(2.05, 41.38))
 print(distance)
 # To plot multiple layers we need to use subplots
