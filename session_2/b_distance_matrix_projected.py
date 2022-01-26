@@ -33,7 +33,7 @@ open_sense_measures = open_sense_measures.groupby(['lat','lon', 'boxName', 'unit
 
 # Setting up the geodataframes
 crs = {'init': 'epsg:4326'}
-crs_bcn = {'init': 'epsg:25831'}
+crs_bcn = {'init': 'epsg:32631'}
 geometry = [Point(xy) for xy in zip(bcn_stations["LONGITUD"], bcn_stations["LATITUD"])]
 bcn_stations_geo = geopandas.GeoDataFrame(bcn_stations, crs=crs, geometry=geometry)
 bcn_stations_geo = bcn_stations_geo.to_crs(crs_bcn)
