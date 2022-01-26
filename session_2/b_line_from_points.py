@@ -1,7 +1,7 @@
 # encoding: utf-8
 
 ##################################################
-# This script shows uses the pandas library to visualise geospatial data sets
+# This script shows uses the geopandas library to create lines from two points geometries
 ##################################################
 #
 ##################################################
@@ -18,26 +18,33 @@
 import pandas as pd
 import geopandas
 import matplotlib.pyplot as plt
-from shapely.geometry import Point, Polygon
+from shapely.geometry import Point, Polygon, LineString
 
-# We read the file from Open Data Barcelona
+# We read the file from Open Data Barcelona and select stations measure temperature
 # https://opendata-ajuntament.barcelona.cat/data/en/dataset/metadades-estacions-meteorologiques/resource/feafec8a-b389-42b5-a85d-cf16f3976440
 url = 'https://opendata-ajuntament.barcelona.cat/data/dataset/82dc847a-661d-4701-a582-b0c1aba89b2a/resource/feafec8a-b389-42b5-a85d-cf16f3976440/download'
-bcn_stations = pd.read_csv(url)
+#bcn_stations = pd.read_csv(url)
+#bcn_stations = bcn_stations[bcn_stations['ACRÒNIM'] == 'TM']
 
-# We read the file from Open Sense Map
+# We read the file from Open Sense Map and calculate the average value by sensor
 open_sense_measures = pd.read_csv('../data/barcelona/opensensemap_org-barcelona.csv')
+open_sense_measures = open_sense_measures.groupby(['lat','lon', 'boxName', 'unit'])['value'].mean().reset_index()
 
-# Setting up the geospatial features
+# Setting up the geodataframes
 crs = {'init': 'epsg:4326'}
-geometry = [Point(xy) for xy in zip(bcn_stations["LONGITUD"], bcn_stations["LATITUD"])]
-bcn_stations_geo = geopandas.GeoDataFrame(bcn_stations, crs=crs, geometry=geometry)
+#geometry = [Point(xy) for xy in zip(bcn_stations["LONGITUD"], bcn_stations["LATITUD"])]
+#bcn_stations_geo = geopandas.GeoDataFrame(bcn_stations, crs=crs, geometry=geometry)
 geometry = [Point(xy) for xy in zip(open_sense_measures["lon"], open_sense_measures["lat"])]
 open_sense_geo = geopandas.GeoDataFrame(open_sense_measures, crs=crs, geometry=geometry)
 
-# To plot multiple layers we need to use subplots
-f, ax = plt.subplots()
-bcn_stations_geo.plot(ax=ax, marker='o', color='blue', markersize=20)
-open_sense_geo.plot(ax=ax, marker='*', color='green', markersize=15)
-plt.show()
+# we create an array with the two points and create a line
+# This approach serve to extend it to multiline
+# Example: https://stdworkflow.com/135/how-to-convert-points-to-lines-in-geopandas
 
+
+# List and point append
+tb = []
+tb.append(open_sense_geo['geometry'].iloc[[0]])
+tb.append(Point(2.05, 41.38))
+
+line = LineString(tb)
