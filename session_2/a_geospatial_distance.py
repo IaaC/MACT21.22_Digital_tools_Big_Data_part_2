@@ -47,8 +47,11 @@ p1 = open_sense_geo.iloc[[0]]
 distance_1 = p1.distance(reference)
 print(distance_1)
 p2 = open_sense_geo.iloc[[1]]
-distance_2 = p2.distance(Point(2.05, 41.38))
+distance_2 = p2.distance(reference)
 print(distance_2)
 
-# Task: Calculate distance between all points in the two dataframes
+# Task: Calculate distance across all points in the two dataframes
+open_sense_geo.geometry.apply(lambda g: bcn_stations_geo.distance(g))
 
+# Comment in Class, this option give us an error due to the indexes
+# distance = open_sense_geo.distance(bcn_stations_geo, alingn=False)
