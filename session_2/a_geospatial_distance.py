@@ -40,13 +40,15 @@ open_sense_geo = geopandas.GeoDataFrame(open_sense_measures, crs=crs, geometry=g
 
 # we can calculate the distrance between a dataframe and a reference point
 reference = Point(2.05, 41.38)
-distance = open_sense_geo.distance(Point(2.05, 41.38))
+distance = open_sense_geo.distance(reference)
 
 # task: change the points and get to the distance
 p1 = open_sense_geo.iloc[[0]]
-p2 = bcn_stations_geo.iloc[[0]]
-distance = p1.distance(Point(2.05, 41.38))
-print(distance)
-# To plot multiple layers we need to use subplots
+distance_1 = p1.distance(reference)
+print(distance_1)
+p2 = open_sense_geo.iloc[[1]]
+distance_2 = p2.distance(Point(2.05, 41.38))
+print(distance_2)
 
+# Task: Calclate distance between all points in the two dataframes
 
