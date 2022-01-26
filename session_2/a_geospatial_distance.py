@@ -50,5 +50,5 @@ p2 = open_sense_geo.iloc[[1]]
 distance_2 = p2.distance(Point(2.05, 41.38))
 print(distance_2)
 
-# Task: Calclate distance between all points in the two dataframes
+# Task: Calculate distance between all points in the two dataframes
 
