@@ -36,6 +36,6 @@ meteocat_2020['DATE'] = pd.to_datetime(meteocat_2020['DATA_LECTURA'], format='%Y
 meteocat_2020['MONTH'] = pd.DatetimeIndex(meteocat_2020['DATE']).month
 
 # Selecting values for radiation and plotting 2d density
-radiation = meteocat_2020[meteocat_2020['ACRÒNIM'].isin(['RS24h'])]
-sns.displot(data=radiation, x="VALOR", y="MONTH")
+radiation = meteocat_2020[meteocat_2020['ACRÒNIM'].isin(['TM'])]
+sns.displot(data=radiation, y="VALOR", x="MONTH")
 plt.show()

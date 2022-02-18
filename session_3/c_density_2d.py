@@ -37,8 +37,10 @@ hum_precip = meteocat_2020[meteocat_2020['ACRÒNIM'].isin(['HRM', 'PM'])]
 # Grouping data by date of measure (aggregates data from all stations)
 hum_precip_group = hum_precip.groupby(['DATA_LECTURA', 'ACRÒNIM'])
 
+hum_precip_group_calculated = hum_precip.groupby(['DATA_LECTURA', 'ACRÒNIM']).mean()
+
 # Once grouped, we calculate the mean and use a pivot function to transpose values into columns
-hum_precip_day = hum_precip_group.mean().reset_index().pivot(index="DATA_LECTURA", columns='ACRÒNIM').reset_index()
+hum_precip_day = hum_precip_group.mean().reset_index().pivot(index="DATA_LECTURA", columns='ACRÒNIM', values='VALOR').reset_index()
 # Note, pivot functions has considerations with indexed colum names
 # Check the issue here https://stackoverflow.com/questions/42099024/pandas-pivot-table-rename-columns
 hum_precip_day.columns = list(map("_".join, hum_precip_day.columns))
