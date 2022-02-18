@@ -25,7 +25,7 @@ import pandas as pd
 
 # Output file path and param
 day_num = 1
-input_csv_filepath = f'../data/footfall/footfall_20210217/day{day_num}Bcntrakingotherdays.csv'
+input_csv_filepath = f'../data/studio/footfall/footfall_20210217/day{day_num}Bcntrakingotherdays.csv'
 
 chunksize = 10 ** 5
 for chunk in pd.read_csv(input_csv_filepath, delimiter='|', low_memory=False, on_bad_lines='skip', chunksize=chunksize):

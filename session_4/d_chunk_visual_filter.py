@@ -36,7 +36,7 @@ minx, miny, maxx, maxy = barris.geometry.total_bounds       # To control the vis
 
 # Output file path and param
 day_num = 1
-input_csv_filepath = f'../data/footfall/footfall_20210217/day{day_num}Bcntrakingotherdays.csv'
+input_csv_filepath = f'../data/studio/footfall/footfall_20210217/day{day_num}Bcntrakingotherdays.csv'
 
 # Setting a loop for chunks is compatible with geopandas
 chunksize = 10 ** 5
