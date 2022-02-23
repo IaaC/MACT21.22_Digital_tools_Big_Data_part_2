@@ -31,8 +31,6 @@ import seaborn as sns
 # Libraries needed for the closest point calculation
 from shapely.ops import nearest_points
 
-
-
 # Predefined area of interest
 aoi_path = "../data/footfall/aoi_glories.geojson"
 aoi = gpd.read_file(aoi_path)
@@ -57,7 +55,7 @@ def near(point, gdf2, id_col):
     points = gdf2.geometry.unary_union
     # find the nearest point and return the corresponding Place value
     nearest = gdf2.geometry == nearest_points(point, points)[1]
-    return gdf2[nearest].loc[:, id_col].values
+    return str(gdf2[nearest].loc[:, id_col])
 
 
 footfall['Nearest_stop'] = footfall.apply(lambda row: near(row.geometry, stops_aoi, 'EQUIPAMENT'), axis=1)
