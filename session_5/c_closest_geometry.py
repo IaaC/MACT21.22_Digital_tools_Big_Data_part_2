@@ -41,27 +41,25 @@ aoi = gpd.read_file(aoi_path)
 minx, miny, maxx, maxy = aoi.geometry.total_bounds
 
 # Geospatial point reference data (originally served as EPSG:25831)
-bus_stops_path = f'../data/barcelona/ESTACIONS_BUS.csv'
-stops = pd.read_csv(bus_stops_path)
-stops = gpd.GeoDataFrame(stops, geometry=gpd.points_from_xy(stops.ETRS89_COORD_X, stops.ETRS89_COORD_Y),
-                         crs='epsg:25831')
-stops_aoi = gpd.clip(stops, aoi)
+bike_lanes = f'../data/barcelona/CARRIL_BICI.geojson'
+lanes = gpd.read_file(bike_lanes)
+lanes_aoi = gpd.clip(aoi, lanes)
 
 
 # Footfall data to process
-footfall_path = "../data/footfall/footfall_aoi.geojson"
+footfall_path = "../data/footfall/footfall_aoi.shp"
 footfall = gpd.read_file(footfall_path)
 
 
 # empty geodataframe for the lines
 shortest_lines = gpd.GeoDataFrame(columns=["id", 'geometry'], crs="EPSG:25831", geometry="geometry")
-shortest_lines_path = "../data/footfall/shortest_lines.geojson"
+shortest_lines_path = "../data/footfall/footfall_to_bikelane.geojson"
 
-stops_aggregated = stops_aoi.geometry.unary_union
+lanes_aggregated = lanes_aoi.geometry.unary_union
 # find the nearest point and return the corresponding Place value
 
 for index, point in footfall.iterrows():
-    nearest = nearest_points(point.geometry, stops_aggregated)[1]
+    nearest = nearest_points(point.geometry, lanes_aggregated)[1]
     line = LineString([point.geometry, nearest])
     row = gpd.GeoDataFrame(geometry=[line])
     row['id'] = index
