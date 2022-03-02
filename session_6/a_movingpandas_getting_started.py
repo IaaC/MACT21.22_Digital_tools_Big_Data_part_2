@@ -77,15 +77,15 @@ toy_traj.to_line_gdf().plot(column="speed", linewidth=5, capstyle='round', legen
 ## Trajectory analysis
 # Extract location at a given time
 print('Location at')
-print(toy_traj.get_position_at(datetime(2019, 11, 18, 15, 12, 40), method="nearest"))
+print(toy_traj.get_position_at(datetime(2018, 1, 1, 12, 10, 40), method="nearest"))
 
 # Extract location at a given time, different methods
 print('Location at (different methods)')
-print(toy_traj.get_position_at(datetime(2019, 11, 18, 15, 12, 40), method="nearest"))
-print(toy_traj.get_position_at(datetime(2019, 11, 18, 15, 12, 40), method="interpolated"))
-print(toy_traj.get_position_at(datetime(2019, 11, 18, 15, 12, 40), method="ffill"))
-print(toy_traj.get_position_at(datetime(2019, 11, 18, 15, 12, 40), method="bfill"))
+print(toy_traj.get_position_at(datetime(2018, 1, 1, 12, 10, 40), method="nearest"))
+print(toy_traj.get_position_at(datetime(2018, 1, 1, 12, 10, 40), method="interpolated"))
+print(toy_traj.get_position_at(datetime(2018, 1, 1, 12, 10, 40), method="ffill"))
+print(toy_traj.get_position_at(datetime(2018, 1, 1, 12, 10, 40), method="bfill"))
 
 # Extract segment from a time interval, different methods
-segment = toy_traj.get_segment_between(datetime(2019, 11, 18, 15, 10, 0), datetime(2019, 11, 18, 15, 15, 0))
+segment = toy_traj.get_segment_between(datetime(2018, 1, 1, 12, 2, 0), datetime(2018, 1, 1, 12, 13, 0))
 print(segment)
