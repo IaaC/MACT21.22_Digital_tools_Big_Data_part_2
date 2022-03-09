@@ -63,6 +63,7 @@ for df_chunk in pd.read_csv(input_csv_filepath, delimiter='|', low_memory=False,
 
 # Saving the concatenated file to geojson
 footfall_aoi.to_file(footfall_aoi_path, driver="GeoJSON")
+print('Points extracted: ' + str(len(footfall_aoi)))
 
 f, ax = plt.subplots()
 aoi.plot(ax=ax, facecolor="none", edgecolor='grey', lw=0.3)

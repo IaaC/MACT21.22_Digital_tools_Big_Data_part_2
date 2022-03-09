@@ -6,16 +6,17 @@ import geopandas as gpd
 ## Config
 
 # Number of rows to read
-nrows = 10
+nrows = 1000
 #nrows = 1000000
 #nrows = None
 
 # Output file path
 day_num = 1
-input_csv_filepath = f'../../data/studio/footfall/footfall_20210217/day{day_num}Bcntrakingotherdays.csv'
+input_csv_filepath = f'../../data/footfall/footfall_20210217/day{day_num}Bcntrakingotherdays.csv'
 
 # Clip mask file path
-clip_mask_filepath = '../../data/studio/clip_area/clip_darea.shp'
+#clip_mask_filepath = '../../data/studio/clip_area/clip_darea.shp'
+clip_mask_filepath = '../../data/footfall/aoi_glories.geojson'
 
 # Output file path
 output_file = f'ff-day{day_num}-clipped.shp'
